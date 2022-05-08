@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if work %}
+          <form class="form-inline my-2 my-lg-0" method="POST">
+                 {% csrf_token %} 
+                <input class="form-control mr-sm-2" type="search" placeholder="{{ work.work }}" value="{{ work.work }}" aria-label="Search" name="work">
+                <input type="hidden" value="{{ work.exec }}" name="exec">
+                <button class="btn btn-warning my-2 my-sm-0" type="submit">Update item</button>
+                <button class="btn btn-danger my-2 my-sm-0" type="submit"><a href="{% url 'home' %}">Cancel</a></button><br\>
+            </form>
+   
+    {% endif %}
+
+{% endblock  %}

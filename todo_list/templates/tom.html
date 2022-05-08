@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    {% if messages %}
+    {% for message in messages %}
+        <div class = "alert alert-warning alert-dismissiable" roles="alert">
+            <button class="close" data-dismiss="alert">
+                <small><sup></sup></small>
+            </button>
+            {{ message }}
+        </div>
+     {% endfor %}
+{% endif %}   
+<div>
+<h1><center>Tommorrow<center></h1>
+</div>
+   <form class="form-inline my-2 my-lg-0" method="POST">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="search" placeholder="Add Task" aria-label="Search" name="work">
+
+
+        <div class="btn-group-vertical"> 
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Add to List</button>
+          </div>
+      </form>
+       </div>
+    
+{% if all_works %}
+     <table class="table table-striped table-dark table-hover">
+         <tr class="edit">
+            <th><center>Tasks</centern></th>
+            <th><center>Priority</center></th>
+            <th><center>Status</center></th>  
+         </tr>
+            {% for things in all_works %}
+                {% if things.exec %}
+                     <tr class="bg-success">  
+                        <td><center>
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle btn-group-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{things.work}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'change' things.id %}">Edit</a>
+                                    
+                                     <a class="dropdown-item" href="{% url 'subs' things.id %}">Add Sub-Tasks</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'dell' things.id %}"  data-toggle="tooltip" data-placement="bottom" title="Mark the Task Not Completed">Not Done</a>
+                                    <a class="dropdown-item" href="{% url 'dl' things.id %}"  data-toggle="tooltip" data-placement="bottom" title="Remove the Task">Remove</a>
+                                   
+                                </div>
+                                
+                            </div>
+                        </center>
+                        </td>  
+                        <td><center>
+                            <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Set Priority
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'top' things.id %}">High</a>
+                                        <a class="dropdown-item" href="#">Low</a>
+                                
+                                    </div>
+                                    </div>
+                            </center>
+                        </td>
+                        <td class="uncross"><center><img src="" width="30" height="30"  class="d-inline-block" alt=""></center></td>
+                        
+                    </tr>
+                     {% elif things.classify %} 
+                        <tr class="bg-danger">  
+                        <td><center>
+                            <div class="dropdown">
+                                <button class="btn btn-warning dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{things.work}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'change' things.id %}">Edit</a>
+                                     <a class="dropdown-item" href="{% url 'subs' things.id %}">Add Sub-Tasks</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'cut' things.id %}" data-toggle="tooltip" data-placement="bottom" title=" Mark the Task completed" >Done</a>
+                                    <a class="dropdown-item" href="{% url 'dell' things.id %}" data-toggle="tooltip" data-placement="bottom" title="Remove the Task">Remove</a>
+                                    
+                                </div>
+                                </div>
+                        </center>
+                        </td>  
+                        <td><center>
+                            <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Set Priority
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'top' things.id %}">High</a>
+                                        <a class="dropdown-item" href="{% url 'low' things.id %}">Low</a>
+                                        </div>
+                                    </div>
+                            </center>
+                        </td>
+                        <td class="cross"><center><img src="" width="30" height="30"  class="d-inline-block" alt=""></center></td>
+                                             
+                        </tr>
+                         
+                    
+                {% else %}  
+                    <tr>  
+                        <td><center>
+                            <div class="dropdown">
+                                <button class="btn btn-warning dropdown-toggle btn-group-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{things.work}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'change' things.id %}">Edit</a>
+                                     <a class="dropdown-item" href="{% url 'subs' things.id %}">Add Sub-Tasks</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'cut' things.id %}" data-toggle="tooltip" data-placement="bottom" title=" Mark the Task completed" >Done</a>
+                                    <a class="dropdown-item" href="{% url 'dl' things.id %}" data-toggle="tooltip" data-placement="bottom" title="Remove the Task">Remove</a>
+                                
+                                </div>
+                                </div>
+                        </center>
+                        </td>  
+                        <td><center>
+                            <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Set Priority
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'top' things.id %}">High</a>
+                                        <a class="dropdown-item" href="{% url 'low' things.id %}">Low</a>
+                                        </div>
+                                    </div>
+                            </center>
+                        </td>
+                        <td class="cross"><center><img src="" width="30" height="30"  class="d-inline-block" alt=""></center></td>
+                                             
+                        </tr>
+                {% endif %}    
+            {% endfor %}       
+     </table>
+     <div class="dropdown" style:"background-color:transparent;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Delete
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            
+     <a href="{% url 'deleteeve' %}"> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Delete all the Tasks">Delete All</button>
+     <a href="{% url 'deleteComp' %}"> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Delete Completed the Tasks">Delete Completed</button>
+     <a href="{% url 'clas' %}"> <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Delete Low Priority item">Delete Low Priority tasks</button>
+     </div>
+    </div> 
+{% endif %}       
+{% endblock %}   

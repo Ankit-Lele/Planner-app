@@ -1,0 +1,59 @@
+.stricken{
+    text-decoration: line-through;
+}
+
+body{
+    background-image: url('wood.jpg');
+    background-repeat: no-repeat ;
+    margin-left: 25%;
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.edit{
+    border-collapse:collapse ;
+    border-style: groove;
+    border-spacing: 5px;
+    border-color:transparent;
+    background-color:sandybrown;
+}
+
+
+.navbar-brand{
+    background-image: url(p.jpg);
+    text-emphasis:Planner;
+}
+.navbar{
+    border-width: 2px;
+    border-color: black;
+}
+
+.cross{
+    background-image: url('dle.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.remove{
+    background-image: url('images.jpg');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.uncross{
+    background-image: url('rit.jpg');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+a:link{
+    color: coral;
+}
+
+.navbar-toggler{
+
+    background-color: chartreuse;
+}
